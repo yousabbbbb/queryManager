@@ -17,16 +17,16 @@ type User struct {
 }
 
 var (
-	host     = ""
-	port     = 5432
-	username = ""
-	password = ""
-	dbname   = ""
+	Host     = ""
+	Port     = 5432
+	Username = ""
+	Password = ""
+	Dbname   = ""
 )
 
 func openConnection() (*sql.DB, error) {
 	log.SetFlags(0)
-	connectString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, username, password, dbname)
+	connectString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", Host, Port, Username, Password, Dbname)
 	db, err := sql.Open("postgres", connectString)
 	if err != nil {
 		log.Printf("couldn't open the database %v\n", err)
@@ -85,7 +85,7 @@ func AddUser(d User) int {
 		log.Printf("error while insering user to database %v\n", err)
 		return -1
 	}
-	userId := exists(username)
+	userId := exists(Username)
 	if userId == -1 {
 		return userId
 	}
